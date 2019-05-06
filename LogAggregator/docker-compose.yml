@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  httpd:
+    image: apache/httpd:2.4
+    build:
+      context: httpd
+    networks:
+      - lognetwork
+    ports:
+      - 8080:80
+  elasticsearch:
+    image: elasticsearch/elasticsearch:7.0.1
+    build:
+      context: elasticsearch
+    networks:
+      lognetwork:
+        aliases:
+          - elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      
+  filebeat:
+    image: filebeat/filebeat:7.0.1
+    build:
+      context: filebeat
+    networks:
+      - lognetwork
+    volumes:
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.0.1
+    networks:
+      - lognetwork
+    ports:
+      - 5601:5601
+
+
+networks:
+  lognetwork:

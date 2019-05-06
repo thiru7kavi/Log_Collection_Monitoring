@@ -1,0 +1,20 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.autodiscover:
+   providers:
+    - type: docker
+      templates:
+        - condition:
+            contains:
+              docker.container.image: httpd
+          config:
+            - type: docker
+              containers.ids:
+                - "${data.docker.container.id}"
+
+
+output.elasticsearch:
+  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
