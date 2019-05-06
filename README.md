@@ -5,6 +5,9 @@ This Infrastructure is simple with components of Docker , Preconfigured with Ope
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+![Stack Overview](./docs/FileBeat.png)
+
 ### Prerequisites
 
 1. Docker for MAC/LINUX
@@ -42,9 +45,11 @@ http://localhost:9200
 http://localhost:5601
 
 ```
-Access this URL to create some logs in Apache 
+Access/Hit this URL to create some logs in Apache 
+
 ```
 http://localhost:8080
+```
 
 You can View Logs in
 
