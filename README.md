@@ -2,11 +2,15 @@
 
 This Infrastructure is simple with components of Docker , Preconfigured with Opensource Tools
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ![Stack Overview](./docs/FileBeat.png)
+
+### Data Flow:
+
+```
+httpd --> filebeat --> elasticsearch --> kibana
+```
+
+Logstash can also can be added for parsing and queuing, But considering single httpd used only filebeat
 
 ### Prerequisites
 
